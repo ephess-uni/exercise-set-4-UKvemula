@@ -11,28 +11,18 @@ FILENAME = get_data_file_path('messages.log')
 
 import re
 
-
 def get_shutdown_events(logfile):
     """
-    Get a list of shutdown events from the log file.
-
-    Args:
-    - logfile (str): The path to the log file.
-
-    Returns:
-    - list: A list of strings representing the shutdown events.
+    Return a list of shutdown events from the given log file.
     """
     with open(logfile, 'r') as file:
-        lines = file.readlines()
+        return [line.strip() for line in file if 'Shutdown initiated' in line]
 
-    shutdown_events = []
-    for line in lines:
-        if 'Shutdown initiated' in line:
-            date_match = re.search(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}', line)
-            if date_match:
-                shutdown_events.append(date_match.group(0))
-
-    return shutdown_events
+def num_shutdowns(logfile):
+    """
+    Return the number of shutdown events in the given log file.
+    """
+    return len(get_shutdown_events(logfile))
 
 pass
 
