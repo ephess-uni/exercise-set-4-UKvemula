@@ -24,7 +24,9 @@ def num_shutdowns(logfile):
        - int: Number of shutdown events in the log file.
        """
     shutdown_events = get_shutdown_events(logfile)
-    return len(shutdown_events) // 2  # Each shutdown event has two entries
+    shutdown_count = sum(
+        1 for event in shutdown_events if 'Shutdown initiated' in event and 'Shutdown complete' in event)
+    return shutdown_count
 
 
 # Example usage
