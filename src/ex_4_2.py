@@ -21,3 +21,4 @@ def logstamp_to_datetime(datestr):
 if __name__ == "__main__":
     test_date = '2022-12-01T01:02:03'
     print(f'{logstamp_to_datetime(test_date)=}')
+

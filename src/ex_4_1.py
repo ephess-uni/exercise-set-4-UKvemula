@@ -13,19 +13,26 @@ FILENAME = get_data_file_path('messages.log')
 # >>>> DO NOT MODIFY CODE ABOVE <<<<
 
 
+import re
+
 def num_shutdowns(logfile):
     """
-       Count the number of shutdown events in the log file.
+    Counts the number of shutdown events in the given log file.
 
-       Args:
-       - logfile (str): Path to the log file.
+    Args:
+    - logfile (str): The path to the log file.
 
-       Returns:
-       - int: Number of shutdown events in the log file.
-       """
-    shutdown_events = get_shutdown_events(logfile)
-    shutdown_count = sum(
-        1 for event in shutdown_events if 'Shutdown initiated' in event and 'Shutdown complete' in event)
+    Returns:
+    - int: The number of shutdown events.
+    """
+    with open(logfile, 'r') as file:
+        lines = file.readlines()
+
+    shutdown_count = 0
+    for line in lines:
+        if "Shutdown initiated" in line:
+            shutdown_count += 1
+
     return shutdown_count
 
 
