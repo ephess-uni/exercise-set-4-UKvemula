@@ -9,11 +9,22 @@ FILENAME = get_data_file_path('messages.log')
 # >>>> DO NOT MODIFY CODE ABOVE <<<<
 
 
+import re
+
 def get_shutdown_events(logfile):
     """
-    Your docstring here.  Replace the pass keyword below with your implementation
+    Return a list of shutdown events from the given log file.
     """
-    pass
+    with open(logfile, 'r') as file:
+        return [line.strip() for line in file if 'Shutdown initiated' in line]
+
+def num_shutdowns(logfile):
+    """
+    Return the number of shutdown events in the given log file.
+    """
+    return len(get_shutdown_events(logfile))
+
+pass
 
 
 # >>>> The code below will call your function and print the results
